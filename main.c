@@ -23,7 +23,7 @@ int user_input() {
     return 1;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     memset(&app, 0, sizeof(app));
 
     initSDL();
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
     void* buffer = malloc(SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));
     ls(SCREEN_WIDTH, SCREEN_HEIGHT, step);
-    prepareScene(frame, buffer);
+    prepareScene(buffer);
     presentScene();
 
     int input = user_input();
@@ -47,7 +47,6 @@ int main(int argc, char *argv[]) {
             SDL_RenderClear(app.renderer);
 
             ls(SCREEN_WIDTH, SCREEN_HEIGHT, step);
-            //presentScene();
         }
         SDL_RenderPresent(app.renderer);
 
@@ -55,6 +54,5 @@ int main(int argc, char *argv[]) {
     }
 
     free(buffer);
-    printf("Hello\n");
     return 0;
 }

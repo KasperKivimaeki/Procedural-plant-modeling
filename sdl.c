@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void prepareScene(const int frame, const void* buffer) {
+void prepareScene(const void* buffer) {
     SDL_UpdateTexture(app.texture, NULL, buffer, SCREEN_WIDTH * sizeof(int));
     SDL_RenderClear(app.renderer);
 }

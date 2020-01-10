@@ -1,16 +1,20 @@
-SDL = -lGL -lSDL2 -I /usr/include/SDL2/ -D_REENTRANT -L/usr/lib -pthread -lm
+CC = gcc
 
-plants: main.o ls.o sdl.o
-	gcc $(SDL) $? -o plants
+LDFLAGS = -g -Wall -Wextra -pthread -Wno-missing-field-initializers -lm
+SDL = `sdl2-config --libs`
 
-main.o : main.c
-	gcc $(SDL) -c $^
+src = $(wildcard *.c)
+obj = $(src:.c=.o)
 
-ls.o: ls.c
-	gcc $(SDL) -c $^
+exe = plants
 
-sdl.o: sdl.c
-	gcc $(SDL) -c $^
+all : $(exe)
 
-clean: 
-	rm -f *.o plants
+clean :
+	rm -f $(exe) *.o
+
+%.o : %.c
+	$(CC) $< $(LDFLAGS) $(SDL) -c
+
+$(exe) : $(obj)
+	$(CC) -o $@ $^ $(LDFLAGS) $(SDL)
